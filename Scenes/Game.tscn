@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Ship.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/LivesContainer.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/PlayerCamera.gd" type="Script" id=4]
+[ext_resource path="res://spaceshooter/Backgrounds/black.png" type="Texture" id=5]
+[ext_resource path="res://spaceshooter/PNG/UI/cursor.png" type="Texture" id=6]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Ship" parent="." instance=ExtResource( 1 )]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 960, 540 )
+current = true
+script = ExtResource( 4 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 964.111, 544.564 )
+scale = Vector2( 7.47266, 4.19494 )
+z_index = -5
+texture = ExtResource( 5 )
+
+[node name="LivesContainer" type="GridContainer" parent="."]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 230.0
+margin_bottom = 94.0
+columns = 3
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Icon1" type="TextureRect" parent="LivesContainer"]
+margin_right = 30.0
+margin_bottom = 33.0
+texture = ExtResource( 6 )
+
+[node name="Icon2" type="TextureRect" parent="LivesContainer"]
+margin_left = 34.0
+margin_right = 64.0
+margin_bottom = 33.0
+texture = ExtResource( 6 )
+
+[node name="Icon3" type="TextureRect" parent="LivesContainer"]
+margin_left = 68.0
+margin_right = 98.0
+margin_bottom = 33.0
+texture = ExtResource( 6 )
+
+[node name="PausePanel" type="Panel" parent="."]
+visible = false
+margin_right = 1914.0
+margin_bottom = 1077.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PausePanel"]
+anchor_left = 0.53
+anchor_top = 0.5
+anchor_right = 0.53
+anchor_bottom = 0.5
+margin_left = -143.92
+margin_top = -93.7363
+margin_right = 160.08
+margin_bottom = 103.264
+size_flags_vertical = 1
+text = "Game Over!!"
+align = 1
+valign = 1
+
+[connection signal="player_killed" from="Ship" to="." method="_on_player_killed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

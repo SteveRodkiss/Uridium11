@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sounds/explosion.wav" type="AudioStream" id=1]
+[ext_resource path="res://spaceshooter/PNG/Effects/star1.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+width = 128
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.54
+flag_disable_z = true
+direction = Vector3( 1, 1, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 348.84
+initial_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+angle = 720.0
+angle_random = 1.0
+color_ramp = SubResource( 2 )
+
+[node name="Explosion" type="Particles2D"]
+pause_mode = 2
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 3 )
+texture = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+autoplay = true
